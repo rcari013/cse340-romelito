@@ -43,3 +43,20 @@ app.get("/", function (req, res) {
   res.render("index", { title: "Home" });
 });
 
+/* ***********************
+ * Optional: Database Check Route (for testing)
+ *************************/
+import pkg from "pg";
+const { Client } = pkg;
+
+app.get("/db-check", async (req, res) => {
+  try {
+    const client = new Client({ connectionString: process.env.DATABASE_URL });
+    await client.connect();
+    const result = await client.query("SELECT NOW()");
+    await client.end();
+    res.send(`✅ Database connected! Server time: ${result.rows[0].now}`);
+  } catch (err) {
+    res.send(`❌ Database connection failed: ${err.message}`);
+  }
+});
