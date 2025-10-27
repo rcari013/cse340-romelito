@@ -2,53 +2,34 @@
  * Primary control file for the application.
  ******************************************/
 
-/* ***********************
- * Require Statements
- *************************/
-const express = require("express");
-const expressLayouts = require("express-ejs-layouts");
-require("dotenv").config();
+import express from "express";
+import expressLayouts from "express-ejs-layouts";
+import dotenv from "dotenv";
+import { Client } from "pg";
+import staticRoutes from "./routes/static.js";
+
+dotenv.config();
+
 const app = express();
-const static = require("./routes/static");
 
-/* ***********************
- * Middleware
- *************************/
-app.use(static);
+// Middleware
+app.use(staticRoutes);
 
-/* ***********************
- * View Engine and Layouts
- *************************/
+// View Engine and Layouts
 app.set("view engine", "ejs");
 app.use(expressLayouts);
 app.set("layout", "./layouts/layout");
 
-/* ***********************
- * Local & Render Server Info
- *************************/
-const port = process.env.PORT || 5500; // Render provides PORT automatically
-const host = process.env.HOST || "0.0.0.0"; // '0.0.0.0' allows Render to accept requests
+// Server Information
+const port = process.env.PORT || 5500;
+const host = process.env.HOST || "0.0.0.0";
 
-/* ***********************
- * Log statement to confirm server operation
- *************************/
-app.listen(port, host, () => {
-  console.log(`✅ Server running at http://${host}:${port}`);
-});
-
-/* ***********************
- * Index Route
- *************************/
-app.get("/", function (req, res) {
+// Index Route
+app.get("/", (req, res) => {
   res.render("index", { title: "Home" });
 });
 
-/* ***********************
- * Optional: Database Check Route (for testing)
- *************************/
-import pkg from "pg";
-const { Client } = pkg;
-
+// Database Check Route
 app.get("/db-check", async (req, res) => {
   try {
     const client = new Client({ connectionString: process.env.DATABASE_URL });
@@ -59,4 +40,9 @@ app.get("/db-check", async (req, res) => {
   } catch (err) {
     res.send(`❌ Database connection failed: ${err.message}`);
   }
+});
+
+// Start Server
+app.listen(port, host, () => {
+  console.log(`✅ Server running at http://${host}:${port}`);
 });

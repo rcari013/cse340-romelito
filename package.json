@@ -1,6 +1,7 @@
 {
   "name": "cse340",
   "version": "1.0.0",
+  "type": "module",
   "description": "Starter project for CSE 340",
   "main": "server.js",
   "scripts": {
