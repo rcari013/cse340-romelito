@@ -1,44 +1,45 @@
 /* ******************************************
  * Primary control file for the application.
- *******************************************/
+ ******************************************/
 
 /* ***********************
  * Require Statements
  *************************/
-const express = require("express")
-const expressLayouts = require("express-ejs-layouts")
-const env = require("dotenv").config()
-const app = express()
-const static = require("./routes/static")
+const express = require("express");
+const expressLayouts = require("express-ejs-layouts");
+require("dotenv").config();
+const app = express();
+const static = require("./routes/static");
 
 /* ***********************
  * Middleware
  *************************/
-app.use(static)
+app.use(static);
 
 /* ***********************
  * View Engine and Layouts
  *************************/
-app.set("view engine", "ejs")
-app.use(expressLayouts)
-app.set("layout", "./layouts/layout")
+app.set("view engine", "ejs");
+app.use(expressLayouts);
+app.set("layout", "./layouts/layout");
 
 /* ***********************
- * Local Server Information
+ * Local & Render Server Info
  *************************/
-const port = process.env.PORT
-const host = process.env.HOST
+const port = process.env.PORT || 5500; // Render provides PORT automatically
+const host = process.env.HOST || "0.0.0.0"; // '0.0.0.0' allows Render to accept requests
 
 /* ***********************
  * Log statement to confirm server operation
  *************************/
-app.listen(port, () => {
-  console.log(`app listening on ${host}:${port}`)
-})
+app.listen(port, host, () => {
+  console.log(`✅ Server running at http://${host}:${port}`);
+});
 
 /* ***********************
  * Index Route
  *************************/
-app.get("/", function(req, res){
-  res.render("index", { title: "Home" })
-})
+app.get("/", function (req, res) {
+  res.render("index", { title: "Home" });
+});
+
