@@ -1,8 +1,11 @@
 /* ===============================
    GLOBAL STYLES
 =============================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700&display=swap');
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Exo 2', Arial, sans-serif;
   background: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%) 50% / 160px 160px;
   margin: 0;
 }
@@ -10,6 +13,46 @@ body {
 html, body {
   overflow-x: hidden;
 }
+
+h1{
+  font-size: 35px;
+
+}
+
+
+h2{
+  font-size: 30px;
+}
+
+h3{
+  font-size: 25px;
+}
+
+.bottom-columns li{
+  font-size: 20px;
+}
+
+.grid span{
+  font-size: 20px;
+}
+
+.hero-overlay li{
+  color: #0074d9;
+  font-weight: 500;
+}
+
+.site-header a{
+  font-size: 20px;
+}
+
+.site-logo{
+  font-size: 35px !important;
+}
+
+footer p{
+  font-size: 20px;
+}
+
 
 /* ===============================
    WRAPPER
@@ -220,21 +263,35 @@ footer {
   }
 
   .hero-overlay {
+    position: absolute;
     top: 50%;
-    left: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;       /* stretch wider across the car */
+    height: 75%;      /* almost full height */
+    background: rgba(255, 255, 255, 86%);
+    padding: 2rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .hero-overlay h3 {
-    font-size: 1rem;
+    margin-top: -10px;
+    font-size: 2rem;     /* larger heading */
+    margin-bottom: 1rem;
   }
 
   .hero-overlay ul {
-    font-size: 0.85rem;
+    font-size: 1.4rem;   /* readable on phones */
+    line-height: 1.6;
   }
 
   .hero-overlay button {
-    font-size: 0.85rem;
-    padding: 0.6rem 1rem;
+    font-size: 1.4rem;
+    padding: 1rem 1.5rem;
   }
 
   .columns {
@@ -253,26 +310,23 @@ footer {
     max-width: 100%;
     box-sizing: border-box;
   }
+
+  .hero-overlay li{
+    color: #0074d9;
+    font-weight: 650;
+  }
+
+
 }
 
-@media (max-width: 480px) {
+
+@media (max-width: 500px) {
   .hero-overlay {
-    top: 50%;
-    left: 25%;
+
+    width: 85% !important;
   }
 
-  .hero-overlay h3 {
-    font-size: 1rem;
-  }
 
-  .hero-overlay ul {
-    font-size: 0.8rem;
-  }
-
-  .hero-overlay button {
-    font-size: 0.8rem;
-    padding: 0.6rem 0.9rem;
-  }
 }
 
 /* ===============================
@@ -283,10 +337,7 @@ footer {
     font-size: 1.8rem;
   }
 
-  .hero-overlay ul {
-    font-size: 1.4rem;
-    line-height: 1.5;
-  }
+
 
   .hero-overlay button {
     font-size: 1.4rem;
@@ -339,7 +390,21 @@ footer {
     height: 50px;
   }
 
-  nav li a {
-    font-size: 1rem;
+
+}
+
+
+
+@media (max-width: 768px) {
+  /* ... your existing code ... */
+
+  h2 {
+    text-align: center;
+  }
+}
+
+@media (min-width:768px){
+  nav ul li{
+    font-size: 25px;
   }
 }
