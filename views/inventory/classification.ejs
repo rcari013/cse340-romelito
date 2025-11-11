@@ -1,0 +1,21 @@
+<!-- ===============================
+  SECTION 1: Content Heading
+  Displays the page title as a main heading
+================================= -->
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } else { %>
+  <% res.redirect('/') %>
+<% } %>
+
+<!-- ===============================
+  SECTION 2: Message Block
+  Reserved for flash messages or notifications (future use)
+================================= -->
+<%# messages() %>
+
+<!-- ===============================
+  SECTION 3: Inventory Items Display
+  Displays the generated HTML grid of inventory items
+================================= -->
+<%- grid %>

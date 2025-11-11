@@ -408,3 +408,23 @@ footer {
     font-size: 25px;
   }
 }
+
+#inv-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 0;
+}
+#inv-display li {
+  list-style: none;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+}
+#inv-display img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
