@@ -27,11 +27,12 @@ Util.getNav = async function (req, res, next) {
 /* **************************************
  * Build the classification view HTML
  * ************************************ */
-Util.buildClassificationGrid = async function (data) {
+Util.buildClassificationGrid = async function (rows) {
   let grid = ""
-  if (data.length > 0) {
+
+  if (rows && rows.length > 0) {
     grid = '<ul id="inv-display">'
-    data.forEach((vehicle) => {
+    rows.forEach((vehicle) => {
       grid += "<li>"
       grid +=
         '<a href="../../inv/detail/' +
@@ -74,8 +75,10 @@ Util.buildClassificationGrid = async function (data) {
   } else {
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   }
+
   return grid
 }
+
 
 /* ****************************************
  * Middleware For Handling Errors
@@ -84,6 +87,8 @@ Util.buildClassificationGrid = async function (data) {
  **************************************** */
 Util.handleErrors = fn => (req, res, next) => 
   Promise.resolve(fn(req, res, next)).catch(next)
+
+
 
 
 module.exports = Util // ✅ move this to the very end
