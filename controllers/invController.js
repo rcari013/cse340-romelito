@@ -10,14 +10,11 @@ invController.buildByClassificationId = async function (req, res, next) {
   const classification_id = req.params.classificationId
   const data = await invModel.getInventoryByClassificationId(classification_id)
 
-  // Correctly use data.rows
-  const grid = await utilities.buildClassificationGrid(data.rows)
+  const grid = await utilities.buildClassificationGrid(data) // data is already an array
   const nav = await utilities.getNav()
 
   const className =
-    data.rows.length > 0
-      ? data.rows[0].classification_name
-      : "No Vehicles Found"
+    data.length > 0 ? data[0].classification_name : "No Vehicles Found"
 
   res.render("./inventory/classification", {
     title: className + " vehicles",
@@ -25,5 +22,6 @@ invController.buildByClassificationId = async function (req, res, next) {
     grid,
   })
 }
+
 
 module.exports = invController
