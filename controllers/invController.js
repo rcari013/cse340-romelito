@@ -8,6 +8,7 @@ const invController = {}
  * ************************** */
 invController.buildByClassificationId = async function (req, res, next) {
   const classification_id = req.params.classificationId
+  // the incorrect one, uncomment = const data = await invModel.getInventoryByClassificationId(clasification_id)
   const data = await invModel.getInventoryByClassificationId(classification_id)
 
   const grid = await utilities.buildClassificationGrid(data) // data is already an array

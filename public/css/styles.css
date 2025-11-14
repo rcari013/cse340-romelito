@@ -393,6 +393,12 @@ footer {
 
 }
 
+.detail-image {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;   /* ← always apply */
+}
+
 
 
 @media (max-width: 768px) {
@@ -407,6 +413,7 @@ footer {
   nav ul li{
     font-size: 25px;
   }
+  
 }
 
 #inv-display {
@@ -462,9 +469,67 @@ footer {
   .detail-image {
     width: 50%;
     margin-right: 1.5rem;
+    border-radius: 5px;
   }
 
   .vehicle-info {
     width: 50%;
+  }
+}
+
+
+@media (max-width: 768px) {
+  body {
+    background: #ffffff !important;
+  }
+}
+
+
+/* ===============================
+   DETAIL PAGE TYPOGRAPHY: BIGGER FONTS
+=============================== */
+
+/* Make the title big and bold */
+.vehicle-title {
+  font-size: 2.6rem !important;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+/* Ensures detail text is readable */
+.vehicle-info p {
+  font-size: 1.3rem;
+  line-height: 1.6;
+}
+
+/* Bold labels (Price, Mileage, etc.) */
+.vehicle-info p strong {
+  font-size: 1.35rem;
+}
+
+/* For desktop/tablet – keep the layout clean */
+@media (min-width: 900px) {
+  .vehicle-info p {
+    font-size: 1.4rem;
+  }
+
+  .vehicle-info p strong {
+    font-size: 1.45rem;
+  }
+}
+
+/* MOBILE IMPROVEMENTS */
+@media (max-width: 768px) {
+  .vehicle-title {
+    font-size: 2.2rem !important;
+    text-align: center;
+  }
+
+  .vehicle-info p {
+    font-size: 1.25rem;
+  }
+
+  .vehicle-info p strong {
+    font-size: 1.3rem;
   }
 }
