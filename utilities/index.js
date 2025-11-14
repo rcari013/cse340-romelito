@@ -34,8 +34,10 @@ Util.buildClassificationGrid = async function (rows) {
     grid = '<ul id="inv-display">'
     rows.forEach((vehicle) => {
       grid += "<li>"
+
+      // IMAGE link
       grid +=
-        '<a href="../../inv/detail/' +
+        '<a href="/inv/detail/' +
         vehicle.inv_id +
         '" title="View ' +
         vehicle.inv_make +
@@ -48,11 +50,14 @@ Util.buildClassificationGrid = async function (rows) {
         " " +
         vehicle.inv_model +
         ' on CSE Motors" /></a>'
+
       grid += '<div class="namePrice">'
       grid += "<hr />"
+
+      // TITLE link
       grid += "<h2>"
       grid +=
-        '<a href="../../inv/detail/' +
+        '<a href="/inv/detail/' +
         vehicle.inv_id +
         '" title="View ' +
         vehicle.inv_make +
@@ -64,11 +69,14 @@ Util.buildClassificationGrid = async function (rows) {
         vehicle.inv_model +
         "</a>"
       grid += "</h2>"
+
+      // PRICE
       grid +=
         "<span>$" +
         new Intl.NumberFormat("en-US").format(vehicle.inv_price) +
         "</span>"
-      grid += "</div>"
+
+      grid += "</div>" // close namePrice
       grid += "</li>"
     })
     grid += "</ul>"
@@ -80,6 +88,7 @@ Util.buildClassificationGrid = async function (rows) {
 }
 
 
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
@@ -87,6 +96,35 @@ Util.buildClassificationGrid = async function (rows) {
  **************************************** */
 Util.handleErrors = fn => (req, res, next) => 
   Promise.resolve(fn(req, res, next)).catch(next)
+
+/* **************************************
+ * Build vehicle detail view HTML
+ ************************************** */
+Util.buildDetailView = async function (vehicle) {
+  let formattedPrice = new Intl.NumberFormat("en-US").format(vehicle.inv_price)
+  let formattedMiles = new Intl.NumberFormat("en-US").format(vehicle.inv_miles)
+
+  return `
+  <div class="vehicle-page">
+
+    <h1 class="vehicle-title">${vehicle.inv_make} ${vehicle.inv_model} (${vehicle.inv_year})</h1>
+
+    <section class="vehicle-detail">
+      <img class="detail-image"
+           src="${vehicle.inv_image}"
+           alt="Image of ${vehicle.inv_make} ${vehicle.inv_model}">
+
+      <div class="vehicle-info">
+        <p><strong>Price:</strong> $${formattedPrice}</p>
+        <p><strong>Mileage:</strong> ${formattedMiles} miles</p>
+        <p><strong>Color:</strong> ${vehicle.inv_color}</p>
+        <p><strong>Description:</strong> ${vehicle.inv_description}</p>
+      </div>
+    </section>
+
+  </div>
+  `
+}
 
 
 

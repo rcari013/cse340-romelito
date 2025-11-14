@@ -11,12 +11,12 @@ async function getClassifications() {
     return data.rows
   } catch (error) {
     console.error("getClassifications error " + error)
-    return [] // ✅ prevents undefined return
+    return []
   }
 }
 
 /* ***************************
- *  Get all inventory items and classification_name by classification_id
+ *  Get inventory items by classification_id
  * ************************** */
 async function getInventoryByClassificationId(classification_id) {
   try {
@@ -30,11 +30,34 @@ async function getInventoryByClassificationId(classification_id) {
     return data.rows
   } catch (error) {
     console.error("getInventoryByClassificationId error " + error)
-    return [] // ✅ prevents undefined return
+    return []
   }
 }
 
+/* ***************************
+ *  Get single inventory item by inv_id
+ * ************************** */
+async function getInventoryByInvId(invId) {
+  try {
+    const data = await pool.query(
+      `SELECT * FROM public.inventory AS i
+      JOIN public.classification AS c
+      ON i.classification_id = c.classification_id
+      WHERE i.inv_id = $1`,
+      [invId]
+    )
+    return data.rows
+  } catch (error) {
+    console.error("getInventoryByInvId error " + error)
+    return []
+  }
+}
+
+/* ***************************
+ * EXPORT FUNCTIONS
+ * ************************** */
 module.exports = {
   getClassifications,
   getInventoryByClassificationId,
+  getInventoryByInvId,
 }
