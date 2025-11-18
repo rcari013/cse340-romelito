@@ -1,0 +1,48 @@
+<section id="registerFormContainer">
+  <form action="/account/register" method="post" id="registerForm">
+
+    <label for="account_firstname">First name</label>
+    <input type="text" id="account_firstname" name="account_firstname" required>
+
+    <label for="account_lastname">Last name</label>
+    <input type="text" id="account_lastname" name="account_lastname" required>
+
+    <label for="account_email">Email address</label>
+    <input type="email" id="account_email" name="account_email" required>
+
+    <label for="account_password">Password</label>
+    <input type="password" id="account_password" name="account_password" required>
+
+    <!-- Optional password toggle button (from the video) -->
+    <span id="pwShowBtn" class="pw-toggle">Show Password</span>
+
+    <button type="submit">Register</button>
+
+    <div class="form-requirements">
+      <p>* Password must:</p>
+      <ul>
+        <li>Be at least 12 characters long</li>
+        <li>Contain at least 1 capital letter</li>
+        <li>Contain at least 1 number</li>
+        <li>Contain at least 1 special character</li>
+      </ul>
+    </div>
+  </form>
+</section>
+
+
+<script>
+  const pwBtn = document.querySelector("#pwShowBtn")
+  const pwInput = document.querySelector("#account_password")
+
+  pwBtn.addEventListener("click", function () {
+    const type = pwInput.getAttribute("type")
+    if (type === "password") {
+      pwInput.setAttribute("type", "text")
+      pwBtn.innerHTML = "Hide Password"
+    } else {
+      pwInput.setAttribute("type", "password")
+      pwBtn.innerHTML = "Show Password"
+    }
+  })
+</script>

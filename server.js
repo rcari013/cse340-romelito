@@ -1,3 +1,5 @@
+const session = require("express-session")
+const pool = require('./database/')
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const dotenv = require("dotenv")
@@ -21,7 +23,32 @@ app.set("views", path.join(__dirname, "views"))
 app.use(expressLayouts)
 app.set("layout", "./layouts/layout")
 
-// Middleware
+
+/* ***********************
+ * Middleware
+ * ************************/
+ app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}))
+
+// Express Messages Middleware
+app.use(require('connect-flash')())
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res)
+  next()
+})
+
+/* ***************************
+ * Routes
+ *************************** */
+
 app.use(staticRoutes)
 
 // Index Route (MVC approach)
@@ -30,6 +57,9 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 
 // Inventory routes
 app.use("/inv", inventoryRoute)
+
+// Account routes
+app.use("/account", require("./routes/accountRoute"))
 
 // Database Check Route
 app.get("/db-check", async (req, res) => {

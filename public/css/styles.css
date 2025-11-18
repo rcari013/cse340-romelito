@@ -533,3 +533,7 @@ footer {
     font-size: 1.3rem;
   }
 }
+
+.notice {
+  color: red;
+}
