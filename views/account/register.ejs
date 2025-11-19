@@ -1,34 +1,61 @@
 <section id="registerFormContainer">
-  <form action="/account/register" method="post" id="registerForm">
+<p>All fields are required.</p>
 
-    <label for="account_firstname">First name</label>
-    <input type="text" id="account_firstname" name="account_firstname" required>
+<%- messages() %>
 
-    <label for="account_lastname">Last name</label>
-    <input type="text" id="account_lastname" name="account_lastname" required>
+<% if (errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
 
-    <label for="account_email">Email address</label>
-    <input type="email" id="account_email" name="account_email" required>
+<form action="/account/register" method="post" id="registerForm">
 
-    <label for="account_password">Password</label>
-    <input type="password" id="account_password" name="account_password" required>
+  <label for="account_firstname">First name</label>
+  <input 
+    type="text" 
+    id="account_firstname" 
+    name="account_firstname" 
+    required
+    value="<%= locals.account_firstname || '' %>"
+  >
 
-    <!-- Optional password toggle button (from the video) -->
-    <span id="pwShowBtn" class="pw-toggle">Show Password</span>
+  <label for="account_lastname">Last name</label>
+  <input 
+    type="text" 
+    id="account_lastname" 
+    name="account_lastname" 
+    required
+    value="<%= locals.account_lastname || '' %>"
+  >
 
-    <button type="submit">Register</button>
+  <label for="account_email">Email address</label>
+  <input 
+    type="email" 
+    id="account_email" 
+    name="account_email" 
+    required
+    placeholder="Enter a valid email address"
+    value="<%= locals.account_email || '' %>"
+  >
 
-    <div class="form-requirements">
-      <p>* Password must:</p>
-      <ul>
-        <li>Be at least 12 characters long</li>
-        <li>Contain at least 1 capital letter</li>
-        <li>Contain at least 1 number</li>
-        <li>Contain at least 1 special character</li>
-      </ul>
-    </div>
-  </form>
+  <label for="account_password">Password</label>
+  <input
+    type="password"
+    id="account_password"
+    name="account_password"
+    required
+    pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{12,}"
+    title="Must be at least 12 characters, include uppercase, lowercase, number, and special character."
+  >
+
+  <button type="submit">Register</button>
+</form>
+
 </section>
+
 
 
 <script>

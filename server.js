@@ -9,6 +9,8 @@ const staticRoutes = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const utilities = require("./utilities")
 const inventoryRoute = require("./routes/inventoryRoute") // ✅ Added this line
+const bodyParser = require("body-parser")
+
 
 dotenv.config()
 
@@ -37,6 +39,9 @@ app.set("layout", "./layouts/layout")
   saveUninitialized: true,
   name: 'sessionId',
 }))
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // Express Messages Middleware
 app.use(require('connect-flash')())
