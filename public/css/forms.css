@@ -145,3 +145,153 @@
 .pw-toggle:hover {
   text-decoration: underline;
 }
+
+#vehicle-management a{
+  font-size: 25px;
+}
+
+#vehicle-management li{
+  list-style-type: none;
+  margin-bottom: 10px;
+}
+
+/*Add classification*/
+
+#classificationFormContainer {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: rgb(34, 33, 33);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+/* Label Styling */
+#classificationForm label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 25px;
+}
+
+/* Input Styling */
+#classificationForm input[type="text"] {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 2rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+#classificationForm p {
+  margin-bottom: 20px;
+}
+
+/* Submit Button Styling */
+#classificationForm button {
+  width: 50%;
+  padding: 0.7rem;
+  font-size: 1rem;
+  background-color: #fff;
+  color: rgb(34, 33, 33);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  display: block;
+  margin: 1rem auto 0 auto; /* Centers the button */
+}
+
+#classificationForm button:hover {
+  background-color: #eee;
+}
+
+/* Validation Rule Text */
+.cls-rule {
+  color: #ddd;
+  font-size: 0.9rem;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Add Vehicle*/
+#vehicleFormContainer {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: rgb(34, 33, 33);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+/* Labels */
+#vehicleForm label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* Inputs + Textarea */
+#vehicleForm input,
+#vehicleForm textarea,
+#vehicleForm select {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* Submit Button */
+#vehicleForm button {
+  width: 50%;
+  padding: 0.7rem;
+  font-size: 1rem;
+  background-color: #fff;
+  color: rgb(34, 33, 33);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  display: block;
+  margin: 1rem auto 0 auto;
+}
+
+#vehicleForm button:hover {
+  background-color: #eee;
+}
+
+/* Default (neutral) */
+input,
+textarea,
+select {
+  transition: background-color 0.25s;
+}
+
+/* Highlight ONLY when the field has content OR is focused */
+
+/* INVALID when focused or not empty */
+input:focus:invalid,
+textarea:focus:invalid,
+select:focus:invalid,
+input:not(:placeholder-shown):invalid,
+textarea:not(:placeholder-shown):invalid {
+  background-color: #ffebee !important; /* light pink */
+}
+
+/* VALID when focused or not empty */
+input:focus:valid,
+textarea:focus:valid,
+select:focus:valid,
+input:not(:placeholder-shown):valid,
+textarea:not(:placeholder-shown):valid {
+  background-color: #e8f5e9 !important; /* light green */
+}

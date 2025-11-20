@@ -1,0 +1,38 @@
+<h1>Add New Classification</h1>
+
+<!-- Flash Message -->
+<% if (message) { %>
+  <p class="notice"><%= message %></p>
+<% } %>
+
+<!-- Validation Errors -->
+<% if (errors && errors.length > 0) { %>
+  <ul class="notice">
+    <% errors.forEach(err => { %>
+      <li><%= err.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<!-- Dark Form Container -->
+<div id="classificationFormContainer">
+  <form id="classificationForm" action="/inv/add-classification" method="post" novalidate>
+
+    <label for="classification_name">Classification Name</label>
+
+    <input 
+      type="text"
+      id="classification_name"
+      name="classification_name"
+      required
+      pattern="^[A-Za-z]+$"
+      title="Alphabetic characters only. No spaces or special characters."
+      value="<%= classification_name || '' %>"
+      placeholder=""
+    >
+
+    <p class="cls-rule">Name must be alphabetic characters only.</p>
+
+    <button type="submit">Add Classification</button>
+  </form>
+</div>

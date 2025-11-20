@@ -1,0 +1,132 @@
+<h1>Add New Vehicle</h1>
+
+<!-- Flash message -->
+<% if (message && message.length > 0) { %>
+  <div class="notice"><%= message %></div>
+<% } %>
+
+<!-- Validation errors -->
+<% if (errors && errors.length > 0) { %>
+  <ul class="notice">
+    <% errors.forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+
+<div id="vehicleFormContainer">
+  <form id="vehicleForm" action="/inv/add-vehicle" method="post" novalidate>
+
+    <!-- CLASSIFICATION SELECT LIST -->
+    <label for="classification_id">Classification</label>
+    <%- classificationList %>
+
+    <!-- MAKE -->
+    <label for="inv_make">Make</label>
+    <input 
+      type="text"
+      id="inv_make"
+      name="inv_make"
+      required
+      placeholder=" "
+      value="<%= inv_make || '' %>"
+    >
+
+    <!-- MODEL -->
+    <label for="inv_model">Model</label>
+    <input 
+      type="text"
+      id="inv_model"
+      name="inv_model"
+      required
+      placeholder=" "
+      value="<%= inv_model || '' %>"
+    >
+
+    <!-- DESCRIPTION -->
+    <label for="inv_description">Description</label>
+    <textarea 
+      id="inv_description"
+      name="inv_description"
+      required
+      placeholder=" "
+    ><%= inv_description || '' %></textarea>
+
+    <!-- IMAGE -->
+    <label for="inv_image">Image Path</label>
+    <input 
+      type="text"
+      id="inv_image"
+      name="inv_image"
+      required
+      placeholder=" "
+      value="<%= inv_image || '/images/vehicles/no-image.png' %>"
+    >
+
+    <!-- THUMBNAIL -->
+    <label for="inv_thumbnail">Thumbnail Path</label>
+    <input 
+      type="text"
+      id="inv_thumbnail"
+      name="inv_thumbnail"
+      required
+      placeholder=" "
+      value="<%= inv_thumbnail || '/images/vehicles/no-image.png' %>"
+    >
+
+    <!-- PRICE -->
+    <label for="inv_price">Price</label>
+    <input 
+      type="text"
+      id="inv_price"
+      name="inv_price"
+      required
+      pattern="^[0-9]+$"
+      title="Numbers only, no commas."
+      placeholder=" "
+      value="<%= inv_price || '' %>"
+    >
+
+    <!-- YEAR -->
+    <label for="inv_year">Year</label>
+    <input 
+      type="text"
+      id="inv_year"
+      name="inv_year"
+      required
+      pattern="^[0-9]{4}$"
+      title="Enter a valid 4-digit year (e.g., 2020)."
+      placeholder=" "
+      value="<%= inv_year || '' %>"
+    >
+
+    <!-- MILES -->
+    <label for="inv_miles">Miles</label>
+    <input 
+      type="text"
+      id="inv_miles"
+      name="inv_miles"
+      required
+      pattern="^[0-9]+$"
+      title="Numbers only. No commas."
+      placeholder=" "
+      value="<%= inv_miles || '' %>"
+    >
+
+    <!-- COLOR -->
+    <label for="inv_color">Color</label>
+    <input 
+      type="text"
+      id="inv_color"
+      name="inv_color"
+      required
+      placeholder=" "
+      value="<%= inv_color || '' %>"
+    >
+
+    <!-- BUTTON -->
+    <button type="submit">Add Vehicle</button>
+
+  </form>
+</div>
