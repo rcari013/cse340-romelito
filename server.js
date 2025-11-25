@@ -10,7 +10,7 @@ const baseController = require("./controllers/baseController")
 const utilities = require("./utilities")
 const inventoryRoute = require("./routes/inventoryRoute") // ✅ Added this line
 const bodyParser = require("body-parser")
-
+const cookieParser = require("cookie-parser")
 
 dotenv.config()
 
@@ -49,6 +49,9 @@ app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
+
+app.use(cookieParser())
+app.use(utilities.checkJWTToken)
 
 /* ***************************
  * Routes

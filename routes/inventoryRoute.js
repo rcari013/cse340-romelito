@@ -49,4 +49,10 @@ router.get("/cause-error", utilities.handleErrors((req, res, next) => {
   throw new Error("Intentional server error for testing 500.");
 }));
 
+router.get(
+  "/getInventory/:classification_id",
+  utilities.handleErrors(invController.getInventoryJSON)
+)
+
+
 module.exports = router;

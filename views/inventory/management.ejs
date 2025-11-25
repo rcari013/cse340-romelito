@@ -1,10 +1,29 @@
-<h1>Vehicle Management</h1>
+<section id="invManagement">
+  <h1>Vehicle Management</h1>
 
-<% if (message && message.length > 0) { %>
-  <p class="notice"><%= message %></p>
-<% } %>
+  <% if (message && message.length > 0) { %>
+    <p class="notice"><%= message %></p>
+  <% } %>
 
-<ul id="vehicle-management">
-  <li><a href="/inv/add-classification">Add New Classification</a></li>
-  <li><a href="/inv/add-vehicle">Add New Vehicle</a></li>
-</ul>
+  <ul id="vehicle-management">
+    <li><a href="/inv/add-classification">Add New Classification</a></li>
+    <li><a href="/inv/add-vehicle">Add New Vehicle</a></li>
+  </ul>
+
+  <h2>Manage Inventory</h2>
+  <p>Select a classification to view the items in that group.</p>
+
+  <!-- Classification Dropdown -->
+  <div id="classificationSelectWrapper">
+    <%- classificationSelect %>
+  </div>
+
+  <!-- Table that will be populated by JS -->
+  <table id="inventoryDisplay"></table>
+
+  <!-- Message for browsers with JavaScript disabled -->
+  <noscript>JavaScript must be enabled to use this page.</noscript>
+
+</section>
+
+<script src="../../js/inventory.js"></script>

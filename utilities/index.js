@@ -1,3 +1,6 @@
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
+
 const invModel = require("../models/inventory-model")
 const Util = {}
 
@@ -149,6 +152,62 @@ Util.buildClassificationList = async function (classification_id = null) {
   classificationList += "</select>"
   return classificationList
 }
+
+/* ****************************************
+* Middleware to check token validity
+**************************************** */
+Util.checkJWTToken = (req, res, next) => {
+ if (req.cookies.jwt) {
+  jwt.verify(
+   req.cookies.jwt,
+   process.env.ACCESS_TOKEN_SECRET,
+   function (err, accountData) {
+    if (err) {
+     req.flash("Please log in")
+     res.clearCookie("jwt")
+     return res.redirect("/account/login")
+    }
+    res.locals.accountData = accountData
+    res.locals.loggedin = 1
+    next()
+   })
+ } else {
+  next()
+ }
+}
+
+/* **************************************
+ * Require login via JWT
+ ************************************** */
+Util.checkLogin = (req, res, next) => {
+  const token = req.cookies.jwt
+
+  if (!token) {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+
+  jwt.verify(
+    token,
+    process.env.ACCESS_TOKEN_SECRET,
+    (err, accountData) => {
+      if (err) {
+        req.flash("notice", "Session expired. Please log in.")
+        res.clearCookie("jwt")
+        return res.redirect("/account/login")
+      }
+
+      // Save decoded JWT data for views
+      res.locals.accountData = accountData
+      res.locals.loggedin = true
+
+      next()
+    }
+  )
+}
+
+
+
 
 
 module.exports = Util

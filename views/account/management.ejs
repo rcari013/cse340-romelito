@@ -1,0 +1,16 @@
+<section id="accountManagement">
+  <h1>Account Management</h1>
+
+  <!-- Flash Messages -->
+  <%- messages() %>
+
+  <% if (errors && errors.length > 0) { %>
+    <ul class="notice">
+      <% errors.forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <p>You’re logged in.</p>
+</section>

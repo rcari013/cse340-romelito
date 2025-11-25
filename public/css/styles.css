@@ -537,3 +537,35 @@ footer {
 .notice {
   color: red;
 }
+
+/* Inventory Management Table Styles */
+
+#inventoryDisplay {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+#inventoryDisplay thead {
+  background-color: #eee;
+  border-bottom: 2px solid #000;
+}
+
+#inventoryDisplay th,
+#inventoryDisplay td {
+  padding: 8px 12px;
+  text-align: left;
+}
+
+#inventoryDisplay tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#inventoryDisplay a {
+  color: #5a0fc8;
+  text-decoration: none;
+}
+
+#inventoryDisplay a:hover {
+  text-decoration: underline;
+}
