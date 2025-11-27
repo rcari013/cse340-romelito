@@ -206,6 +206,29 @@ Util.checkLogin = (req, res, next) => {
   )
 }
 
+/* ****************************************
+ *  Check account type (Employee or Admin only)
+ * **************************************** */
+Util.checkEmployeeOrAdmin = (req, res, next) => {
+  // Must be logged in first
+  if (!res.locals.loggedin) {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+
+  // Must be Admin or Employee
+  const type = res.locals.accountData.account_type
+
+  if (type === "Employee" || type === "Admin") {
+    return next()
+  }
+
+  // Otherwise, deny access
+  req.flash("notice", "Access denied. You do not have permission to view this page.")
+  return res.redirect("/account/login")
+}
+
+
 
 
 

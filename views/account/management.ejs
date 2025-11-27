@@ -1,16 +1,29 @@
 <section id="accountManagement">
-  <h1>Account Management</h1>
+
+  <% 
+    const firstname = locals.accountData.account_firstname;
+    const accountType = locals.accountData.account_type;
+    const userId = locals.accountData.account_id;
+  %>
+
+  <!-- Main heading (H1) -->
+  <h1>Welcome <%= firstname %></h1>
+
+  <!-- Secondary heading (H2) -->
+  <h2>Account Management</h2>
 
   <!-- Flash Messages -->
   <%- messages() %>
 
-  <% if (errors && errors.length > 0) { %>
-    <ul class="notice">
-      <% errors.forEach(error => { %>
-        <li><%= error.msg %></li>
-      <% }) %>
-    </ul>
+  <!-- Update Account Info (available to all users) -->
+  <p>
+    <a href="/account/update/<%= userId %>">Update Account Information</a>
+  </p>
+
+  <!-- Inventory Management for Employee/Admin only -->
+  <% if (accountType === "Employee" || accountType === "Admin") { %>
+      <h3>Inventory Management</h3>
+      <p><a href="/inv/">Manage Inventory</a></p>
   <% } %>
 
-  <p>You’re logged in.</p>
 </section>

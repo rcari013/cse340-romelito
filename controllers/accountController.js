@@ -150,6 +150,79 @@ async function buildAccountManagement(req, res, next) {
   })
 }
 
+/* ****************************************
+ *  Deliver Update Account View
+ **************************************** */
+async function buildUpdate(req, res, next) {
+  const account_id = parseInt(req.params.account_id)
+  let nav = await utilities.getNav()
+  const account = await accountModel.getAccountById(account_id)
+
+  res.render("account/update", {
+    title: "Update Account",
+    nav,
+    errors: null,
+    message: null,
+    account_id: account.account_id,
+    account_firstname: account.account_firstname,
+    account_lastname: account.account_lastname,
+    account_email: account.account_email,
+  })
+}
+
+/* ****************************************
+ *  Process Account Update
+ **************************************** */
+async function updateAccount(req, res, next) {
+  let nav = await utilities.getNav()
+
+  const {
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email
+  } = req.body
+
+  const result = await accountModel.updateAccount(
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email
+  )
+
+  if (result) {
+    req.flash("notice", "Account information updated successfully.")
+    const updatedAccount = await accountModel.getAccountById(account_id)
+    return res.redirect("/account/")
+  }
+
+  req.flash("notice", "Update failed.")
+  return res.redirect(`/account/update/${account_id}`)
+}
+
+/* ****************************************
+ *  Process Password Change
+ **************************************** */
+async function updatePassword(req, res, next) {
+  let nav = await utilities.getNav()
+  const { account_id, account_password } = req.body
+
+  // Hash new password
+  const bcrypt = require("bcryptjs")
+  const hashedPassword = await bcrypt.hash(account_password, 10)
+
+  const result = await accountModel.updatePassword(account_id, hashedPassword)
+
+  if (result) {
+    req.flash("notice", "Password updated successfully.")
+    return res.redirect("/account/")
+  }
+
+  req.flash("notice", "Password update failed.")
+  return res.redirect(`/account/update/${account_id}`)
+}
+
+
 
 
 module.exports = {
@@ -157,5 +230,8 @@ module.exports = {
   buildRegister,
   registerAccount,
   accountLogin,
-  buildAccountManagement
+  buildAccountManagement,
+  buildUpdate,
+  updateAccount,
+  updatePassword
 }

@@ -1,0 +1,119 @@
+<h1><%= title %></h1>
+
+<!-- Flash message -->
+<% if (message && message.length > 0) { %>
+  <div class="notice"><%= message %></div>
+<% } %>
+
+<!-- Validation errors -->
+<% if (errors && errors.length > 0) { %>
+  <ul class="notice">
+    <% errors.forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<div id="vehicleFormContainer">
+  <form id="vehicleForm" action="/inv/update" method="post" novalidate>
+
+    <!-- Hidden ID (required for updating) -->
+    <input type="hidden" name="inv_id" value="<%= inv_id %>">
+
+    <!-- CLASSIFICATION SELECT LIST -->
+    <label for="classification_id">Classification</label>
+    <%- classificationSelect %>
+
+    <!-- MAKE -->
+    <label for="inv_make">Make</label>
+    <input 
+      type="text"
+      id="inv_make"
+      name="inv_make"
+      required
+      value="<%= inv_make %>"
+    >
+
+    <!-- MODEL -->
+    <label for="inv_model">Model</label>
+    <input 
+      type="text"
+      id="inv_model"
+      name="inv_model"
+      required
+      value="<%= inv_model %>"
+    >
+
+    <!-- DESCRIPTION -->
+    <label for="inv_description">Description</label>
+    <textarea 
+      id="inv_description"
+      name="inv_description"
+      required
+    ><%= inv_description %></textarea>
+
+    <!-- IMAGE -->
+    <label for="inv_image">Image Path</label>
+    <input 
+      type="text"
+      id="inv_image"
+      name="inv_image"
+      required
+      value="<%= inv_image %>"
+    >
+
+    <!-- THUMBNAIL -->
+    <label for="inv_thumbnail">Thumbnail Path</label>
+    <input 
+      type="text"
+      id="inv_thumbnail"
+      name="inv_thumbnail"
+      required
+      value="<%= inv_thumbnail %>"
+    >
+
+    <!-- PRICE -->
+    <label for="inv_price">Price</label>
+    <input 
+      type="text"
+      id="inv_price"
+      name="inv_price"
+      required
+      value="<%= inv_price %>"
+    >
+
+    <!-- YEAR -->
+    <label for="inv_year">Year</label>
+    <input 
+      type="text"
+      id="inv_year"
+      name="inv_year"
+      required
+      value="<%= inv_year %>"
+    >
+
+    <!-- MILES -->
+    <label for="inv_miles">Miles</label>
+    <input 
+      type="text"
+      id="inv_miles"
+      name="inv_miles"
+      required
+      value="<%= inv_miles %>"
+    >
+
+    <!-- COLOR -->
+    <label for="inv_color">Color</label>
+    <input 
+      type="text"
+      id="inv_color"
+      name="inv_color"
+      required
+      value="<%= inv_color %>"
+    >
+
+    <!-- BUTTON -->
+    <button type="submit">Update Vehicle</button>
+
+  </form>
+</div>

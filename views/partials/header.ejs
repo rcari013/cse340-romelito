@@ -1,4 +1,20 @@
 <div class="site-header">
   <h1><a href="/" class="site-logo">CSE Motors</a></h1>
-  <a href="/account/login">My Account</a>
+
+  <% if (locals.loggedin) { %>
+
+      <!-- Welcome message linking to account management -->
+      <a href="/account/">
+        Welcome <%= locals.accountData.account_firstname %>
+      </a>
+
+      <!-- Logout link -->
+      <a href="/account/logout">Logout</a>
+
+  <% } else { %>
+
+      <!-- My Account link (only when NOT logged in) -->
+      <a href="/account/login">My Account</a>
+
+  <% } %>
 </div>
