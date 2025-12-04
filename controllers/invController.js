@@ -45,7 +45,10 @@ invController.buildByInvId = async function (req, res, next) {
     title: `${vehicle.inv_make} ${vehicle.inv_model}`,
     nav,
     detailHtml,
+    vehicle,
+    loggedin: res.locals.loggedin
   })
+
 }
 
 /* ***************************

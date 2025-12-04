@@ -1,0 +1,27 @@
+<section class="appointment-list">
+  <h1>All Scheduled Test Drives</h1>
+
+  <table class="employee-appointment-table">
+    <thead>
+      <tr>
+        <th>Customer</th>
+        <th>Vehicle</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% appointments.forEach(a => { %>
+      <tr>
+        <td><%= a.account_firstname %> <%= a.account_lastname %></td>
+        <td><%= a.inv_make %> <%= a.inv_model %></td>
+        <td><%= a.appointment_date.toISOString().split("T")[0] %></td>
+        <td><%= a.appointment_time %></td>
+        <td class="status <%= a.status %>"><%= a.status %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>

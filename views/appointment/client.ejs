@@ -1,0 +1,56 @@
+<section class="appointment-list">
+  <h1>My Test Drive Appointments</h1>
+
+  <% if (message && message.length > 0) { %>
+    <div class="notice"><%= message %></div>
+  <% } %>
+
+  <% 
+    // Time formatting function
+    function formatTime(t) {
+      const [h, m] = t.split(":");
+      let hour = parseInt(h);
+      const ampm = hour >= 12 ? "PM" : "AM";
+      hour = hour % 12 || 12;
+      return `${hour}:${m} ${ampm}`;
+    }
+  %>
+
+  <table class="appointment-table">
+    <thead>
+      <tr>
+        <th>Vehicle</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% appointments.forEach(a => { %>
+        <tr>
+          <td><%= a.inv_make %> <%= a.inv_model %></td>
+          <td><%= a.appointment_date.toISOString().split("T")[0] %></td>
+
+      
+          <td><%= formatTime(a.appointment_time) %></td>
+
+          <td class="status <%= a.status %>"><%= a.status %></td>
+
+          <td>
+            <% if (a.status === "pending" || a.status === "approved") { %>
+              <form action="/appointment/cancel" method="POST" 
+                    onsubmit="return confirm('Cancel this appointment?');">
+                <input type="hidden" name="appointment_id" value="<%= a.appointment_id %>">
+                <button class="cancel-btn">Cancel</button>
+              </form>
+            <% } else { %>
+                <span class="no-action">—</span>
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>

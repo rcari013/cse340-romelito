@@ -100,9 +100,6 @@ Util.buildClassificationGrid = async function (rows) {
 Util.handleErrors = fn => (req, res, next) => 
   Promise.resolve(fn(req, res, next)).catch(next)
 
-/* **************************************
- * Build vehicle detail view HTML
- ************************************** */
 Util.buildDetailView = async function (vehicle) {
   let formattedPrice = new Intl.NumberFormat("en-US").format(vehicle.inv_price)
   let formattedMiles = new Intl.NumberFormat("en-US").format(vehicle.inv_miles)
@@ -122,12 +119,19 @@ Util.buildDetailView = async function (vehicle) {
         <p><strong>Mileage:</strong> ${formattedMiles} miles</p>
         <p><strong>Color:</strong> ${vehicle.inv_color}</p>
         <p><strong>Description:</strong> ${vehicle.inv_description}</p>
+
+
+        <a class="test-drive-btn" href="/appointment/book/${vehicle.inv_id}">
+          Schedule a Test Drive
+        </a>
+
       </div>
     </section>
 
   </div>
   `
 }
+
 
 /* ****************************************
  * Build Classification Drop-down <select>
@@ -227,6 +231,47 @@ Util.checkEmployeeOrAdmin = (req, res, next) => {
   req.flash("notice", "Access denied. You do not have permission to view this page.")
   return res.redirect("/account/login")
 }
+
+Util.checkAdmin = (req, res, next) => {
+  if (!res.locals.loggedin) {
+    req.flash("notice", "Please log in.");
+    return res.redirect("/account/login");
+  }
+
+  if (res.locals.accountData.account_type === "Admin") {
+    return next();
+  }
+
+  req.flash("notice", "Admin access only.");
+  return res.redirect("/");
+};
+
+Util.checkEmployee = (req, res, next) => {
+  if (!res.locals.loggedin) {
+    req.flash("notice", "Please log in.");
+    return res.redirect("/account/login");
+  }
+
+  const role = res.locals.accountData.account_type;
+
+  if (role === "Employee" || role === "Admin") {
+    return next();
+  }
+
+  req.flash("notice", "Employees only.");
+  return res.redirect("/");
+};
+
+
+/* ****************************************
+ message success
+ **************************************** */
+Util.checkMessages = (req, res, next) => {
+  res.locals.messages = req.flash();
+  next();
+};
+
+
 
 
 
