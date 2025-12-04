@@ -31,7 +31,7 @@
       <% appointments.forEach(a => { %>
         <tr>
           <td><%= a.inv_make %> <%= a.inv_model %></td>
-          <td><%= a.appointment_date.toISOString().split("T")[0] %></td>
+          <td><%= a.appointment_date.toLocaleDateString("en-CA") %></td>
 
       
           <td><%= formatTime(a.appointment_time) %></td>
